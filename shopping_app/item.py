@@ -1,5 +1,6 @@
-class Item:
-    from ownable import set_owner #nuevo
+from ownable import Ownable
+class Item(Ownable):
+    #from ownable import set_owner #nuevo
     instances = []
 
     def __init__(self, name, price, owner=None):

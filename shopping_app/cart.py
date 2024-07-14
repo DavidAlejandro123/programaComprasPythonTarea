@@ -1,7 +1,8 @@
 from seller import Seller #nuevo
-class Cart:
+from ownable import Ownable #nuevo
+class Cart(Ownable):
     from item_manager import show_items
-    from ownable import set_owner #nuevo
+    #from ownable import set_owner #nuevo
     from wallet import Wallet #nuevo
     
     def __init__(self, owner):
@@ -41,8 +42,10 @@ class Cart:
             
             self.owner.wallet.withdraw(self.total_amount()) #nuevo: se retira
             cantidad = self.total_amount()
-            seller.wallet.deposit(cantidad) #nuevo: se deposita
-            self.items.clear() #se vacia canasta
+            seller.wallet.deposit(cantidad)                 #nuevo: se deposita
+            for item in self.items:         
+                item.owner = self.owner           #se utiliza consejo de linea 40 
+            self.items.clear()                    #se vacia canasta
 
     '''def deposit(self, amount):
         self.balance += int(amount)
